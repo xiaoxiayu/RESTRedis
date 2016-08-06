@@ -1,0 +1,34 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: platform-cache
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        run: platform-cache
+    spec:
+      containers:
+      - name: platformcache
+        command: ["/bin/sh", "-c", "/foxitqa/PlatformCacheService -redis=10.103.129.80"]
+        image: 10.103.129.81:5000/platform-cache:1.0
+        ports:
+        - containerPort: 9090
+      nodeSelector:
+        SET: platform
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: platform-cache-service
+  labels:
+    run: platform-cache-service
+spec:
+  type: NodePort
+  ports:
+  - port: 9090
+    protocol: TCP
+    nodePort: 32457
+  selector:
+    run: platform-cache
