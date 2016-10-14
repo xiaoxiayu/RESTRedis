@@ -363,9 +363,9 @@ func (this *CacheRequestHandler) getString(w http.ResponseWriter, r *http.Reques
 	if err == redis.Nil {
 		fmt.Fprintf(w, "%v", "NIL")
 	} else if err != nil {
-		fmt.Fprintf(w, "%v", "ERR:"+err.Error())
+		ErrorExcu(w, err)
 	} else {
-		fmt.Fprintf(w, "%v", val)
+		ErrorNil(w, val)
 	}
 }
 
