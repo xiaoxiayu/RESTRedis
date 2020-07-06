@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
       - name: platformcache
-        command: ["/bin/sh", "-c", "/foxitqa/PlatformCacheService -redis=10.103.129.80"]
+        command: ["/bin/sh", "-c", "/xxqa/PlatformCacheService -redis=10.103.129.80"]
         image: 10.103.129.81:5000/platform-cache:1.0
         ports:
         - containerPort: 9090
